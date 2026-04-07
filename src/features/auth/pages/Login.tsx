@@ -18,7 +18,8 @@ export default function Login() {
 
   async function handleLogin(values: LoginFormValues) {
     const response = await mutateAsync(values);
-    localStorage.setItem("user", JSON.stringify(response));
+    const user = localStorage.setItem("user", JSON.stringify(response));
+    console.log(user);
     navigate("/home");
   }
 

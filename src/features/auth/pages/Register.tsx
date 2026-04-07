@@ -19,7 +19,7 @@ export default function Register() {
 
   async function handleRegister(values: RegisterFormValues) {
     await mutateAsync(values);
-    navigate("/login");
+    navigate("/home");
   }
 
   return (

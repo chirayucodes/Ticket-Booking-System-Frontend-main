@@ -8,7 +8,6 @@ export default function Auth() {
     <Routes>
       <Route index element={<Navigate to="login" />} />
       <Route path="login" element={<Login />} />
-      {/* <Route path="home" element={<Home />} /> */}
       <Route path="register" element={<Register />} />
     </Routes>
   );

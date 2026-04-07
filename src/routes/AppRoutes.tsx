@@ -1,20 +1,20 @@
 import { Route, Routes } from "react-router";
 import Auth from "../features/auth";
 import Home from "../features/movies/pages/Home";
+import Login from "features/auth/pages/Login";
+import Register from "features/auth/pages/Register";
+import Bookings from "features/bookings";
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/home" element={<Home />} />
-
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="auth/*" element={<Auth />} />
-      {/* <Route path="/register" element={<Register />} /> */}
-      {/* <Route path="/home" element={<div>Home Page</div>} />
-      <Route path="/movies/:movieId" element={<div>Movie Details</div>} />
-      <Route path="/book/:showId" element={<div>Book Seats</div>} />
-      <Route path="/profile" element={<div>Booking History</div>} /> */}
-
-      <Route path="*" element={<div>Page Not Found</div>} />
+      {/* <Route path="/book/:showId" element={<BookSeats />} /> */}
+      {/* <Route path="/bookings/confirmation" element={<BookingDetails />} /> */}
+      <Route path="booking/*" element={<Bookings />} />
     </Routes>
   );
 }

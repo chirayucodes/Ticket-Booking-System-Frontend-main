@@ -14,7 +14,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    navigate("/auth/login");
+    navigate("/auth/login")
   };
 
   return (
@@ -25,7 +25,7 @@ export default function Navbar() {
           className="text-2xl font-bold tracking-tighter cursor-pointer"
           onClick={() => navigate("/home")}
         >
-          BOOK<span className="text-[#F84464]">MY</span>SHOW
+          <span className="text-[#F84464]">BOOK MY SHOW</span>
         </div>
 
         {/* User Actions */}

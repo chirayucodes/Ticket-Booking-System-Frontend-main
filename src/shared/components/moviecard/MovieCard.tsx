@@ -20,7 +20,7 @@ export default function MovieCard({ movie, onBookNow }: MovieCardProps) {
           {movie.movieName}
         </h3>
 
-        {/* Placeholder for Movie Meta (Genre/Rating) */}
+        {/*Placeholder for Movie Information*/}
         <div className="flex gap-2 mb-4">
           <span className="text-[10px] bg-white/10 text-gray-300 px-2 py-1 rounded uppercase tracking-wider font-semibold">
             2D / 3D

@@ -1,8 +1,9 @@
-import { MovieCard } from "@shared/components/MovieCard";
+// import { MovieCard } from "@shared/components/MovieCard";
 // import { MovieCard } from "../../../shared/components/MovieCard";
+import { MovieCard } from "shared/components/moviecard";
 import { useMoviesQuery } from "../queries";
+import { useNavigate } from "react-router-dom";
 
-// Match the structure from your query/API
 interface Movie {
   id: string | number;
   movieName: string;
@@ -11,10 +12,10 @@ interface Movie {
 export default function Home() {
   const { data: movies = [], isLoading } = useMoviesQuery();
 
-  const handleBooking = (id: string | number) => {
-    console.log(`Navigating to booking for movie ID: ${id}`);
+  const navigate = useNavigate();
+  const handleBookNow = (id: string | number) => {
+    navigate(`/booking/${id}`);
   };
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#0d1117] flex items-center justify-center">
@@ -27,7 +28,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0d1117] text-white p-6 md:p-10 relative overflow-hidden">
-      {/* Background Glows to match Auth pages */}
       <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[#F84464] rounded-full blur-[150px] opacity-10"></div>
 
       <header className="relative z-10 mb-10 flex justify-between items-center">
@@ -39,10 +39,9 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Movie Grid */}
       <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {movies.map((movie: Movie) => (
-          <MovieCard key={movie.id} movie={movie} onBookNow={handleBooking} />
+          <MovieCard key={movie.id} movie={movie} onBookNow={handleBookNow} />
         ))}
       </div>
 

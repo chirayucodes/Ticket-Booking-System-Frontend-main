@@ -4,7 +4,7 @@ import { Navbar } from "../navbar";
 export default function MainLayout() {
   const isLoggedIn = !!localStorage.getItem("user");
 
-  // Auth Guard: If not logged in, boot them to login page
+
   if (!isLoggedIn) {
     return <Navigate to="/auth/login" replace />;
   }
