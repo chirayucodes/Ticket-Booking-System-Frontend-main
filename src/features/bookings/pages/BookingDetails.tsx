@@ -3,9 +3,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 export default function BookingDetails() {
   const navigate = useNavigate();
   const location = useLocation();
+  const userJson = localStorage.getItem("user");
+  const user = userJson ? JSON.parse(userJson) : null;
 
-  // We grab the data passed from the BookSeats page via navigate state
-  const bookingData = location.state || {
+  const bookingData = location.state ||  {
     movieName: "Movie Title",
     seatsBooked: 0,
     totalPrice: 0,
@@ -19,7 +20,7 @@ export default function BookingDetails() {
         {/* Ticket Top: Movie Info */}
         <div className="p-8 pb-4 text-center">
           <div className="inline-block px-3 py-1 bg-[#F84464]/20 text-[#F84464] text-[10px] font-bold rounded-full mb-4 tracking-widest uppercase">
-            Booking Confirmed
+            Booking Confirmed by {user?.name || "Guest"}
           </div>
           <h1 className="text-2xl font-black text-white uppercase tracking-tight mb-2">
             Ticket Summary
@@ -29,14 +30,14 @@ export default function BookingDetails() {
           </p>
         </div>
 
-        {/* Dashed Separator (The "Tear" line) */}
+        {/* ticket line */}
         <div className="flex items-center px-4">
           <div className="w-4 h-8 bg-[#0d1117] rounded-r-full -ml-4"></div>
           <div className="flex-1 border-t-2 border-dashed border-white/10 mx-2"></div>
           <div className="w-4 h-8 bg-[#0d1117] rounded-l-full -mr-4"></div>
         </div>
 
-        {/* Ticket Bottom: Price and Details */}
+        {/* ticket price and details */}
         <div className="p-8 pt-6 space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div>

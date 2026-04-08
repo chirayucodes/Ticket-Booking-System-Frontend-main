@@ -10,9 +10,7 @@ export interface Show {
   isActive: boolean;
 }
 
-/*
- {movieId:int}/{date}
- */
+
 export const useMovieShowsQuery = (movieId: number, date: string) => {
   return useQuery({
     queryKey: ["movie-shows", movieId, date],
@@ -23,9 +21,7 @@ export const useMovieShowsQuery = (movieId: number, date: string) => {
   });
 };
 
-/*
- Endpoint: {showId:int}
- */
+
 export const useShowDetailsQuery = (movieId: number) => {
   return useQuery({
     queryKey: ["show-details", movieId],

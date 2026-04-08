@@ -8,13 +8,12 @@ interface User {
 export default function Navbar() {
   const navigate = useNavigate();
 
-  // Get user data safely from localStorage
   const userJson = localStorage.getItem("user");
   const user: User | null = userJson ? JSON.parse(userJson) : null;
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    navigate("/auth/login")
+    navigate("/auth/login");
   };
 
   return (
@@ -25,25 +24,53 @@ export default function Navbar() {
           className="text-2xl font-bold tracking-tighter cursor-pointer"
           onClick={() => navigate("/home")}
         >
-          <span className="text-[#F84464]">BOOK MY SHOW</span>
+          <span className="text-[#F84464]">BOOK MY SHOW ?</span>
         </div>
 
         {/* User Actions */}
         <div className="flex items-center gap-6">
-          <div className="flex flex-col items-end">
-            <span className="text-xs text-gray-400">Welcome,</span>
-            <span className="text-sm font-semibold text-white">
-              {user?.name || "Guest User"}
-            </span>
-          </div>
+          {user ? (
+            <div className="flex items-center gap-4">
+              {/* Text Info */}
+              <div className="flex flex-col items-end border-r border-white/10 pr-4">
+                <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold leading-none">
+                  Welcome
+                </span>
+                <span className="text-sm font-bold text-white mt-1">
+                  {user.name}
+                </span>
+                <button
+                  onClick={() => navigate("/booking/confirmation")}
+                  className="mt-1 group"
+                >
+                  <span className="text-[11px] text-gray-400 group-hover:text-[#F84464] transition-colors flex items-center gap-1">
+                    View Profile
+                    <span className="group-hover:translate-x-0.5 transition-transform">
+                      →
+                    </span>
+                  </span>
+                </button>
+              </div>
 
-          <button
-            onClick={handleLogout}
-            className="bg-white/5 hover:bg-[#F84464] border border-white/10 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all duration-300"
-          >
-            LOGOUT
-          </button>
+              {/* Logout Action */}
+              <button
+                onClick={handleLogout}
+                className="bg-white/5 hover:bg-[#F84464]/10 border border-white/10 hover:border-[#F84464]/50 text-white text-[11px] font-black tracking-widest py-2 px-4 rounded-xl transition-all active:scale-95"
+              >
+                LOGOUT
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => navigate("/auth/login")}
+              className="bg-[#F84464] text-white text-xs font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-[#F84464]/20 hover:bg-[#e03a58] transition-all active:scale-95"
+            >
+              LOGIN
+            </button>
+          )}
         </div>
+
+
       </div>
     </nav>
   );

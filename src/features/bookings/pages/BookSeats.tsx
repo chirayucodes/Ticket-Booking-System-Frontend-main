@@ -1,6 +1,3 @@
-
-
-
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -14,12 +11,11 @@ export default function BookSeats() {
   const navigate = useNavigate();
   const [ticketCount, setTicketCount] = useState(1);
 
-  // Fetch show details (AvailableSeats, ShowTime, etc.)
   const { data: show, isLoading } = useShowDetailsQuery(Number(showId));
   const { mutateAsync: createBooking, isPending } = useCreateBookingMutation();
   const { data } = useMovieShowsQuery(
     Number(show?.movieId),
-    new Date().toISOString().split("T")[0],
+    new Date().toISOString().split("T")[0],//passing today's date in YYYY-MM-DD format
   );
   console.log("Show details:", show);
   console.log("Movie shows for the day:", data);
@@ -33,7 +29,6 @@ export default function BookSeats() {
       return;
     }
 
-    // 2. Prepare the payload matching your API
     const payload = {
       userId: Number(user.id),
       showId: Number(showId),
@@ -59,14 +54,14 @@ export default function BookSeats() {
 
   return (
     <div className="min-h-screen bg-[#0d1117] text-white p-6 flex flex-col items-center justify-center">
-      {/* Theatre Screen Visual */}
+      {/* theatre screen visual */}
       <div className="w-full max-w-md mb-12">
         <div className="h-1 bg-[#F84464] shadow-[0_0_20px_#F84464] rounded-full"></div>
         <p className="text-center text-[10px] text-gray-500 mt-2 tracking-[0.5em] uppercase">
           Screen
         </p>
       </div>
-      {/* Ticket Selection Card */}
+      {/* ticket selection card */}
       <div className="w-full max-w-md backdrop-blur-2xl bg-white/5 border border-white/10 rounded-3xl p-8 shadow-2xl">
         <h2 className="text-xl font-bold mb-2">Select Number of Tickets</h2>
         <p className="text-sm text-gray-400 mb-8 italic">
@@ -75,7 +70,7 @@ export default function BookSeats() {
         {/* <p>
             <span className="font-bold">Movie:</span> {data?. || "N/A"}
         </p> */}
-        {/* Simple Counter UI */}
+        {/* simple sounter UI */}
         <div className="flex items-center justify-between bg-black/20 rounded-2xl p-6 border border-white/5 mb-8">
           <button
             onClick={() => setTicketCount(Math.max(1, ticketCount - 1))}
@@ -104,7 +99,7 @@ export default function BookSeats() {
             +
           </button>
         </div>
-        {/* /* Pricing Summary */}
+        {/* /* pricing summary */}
         <div className="space-y-3 mb-8 px-2">
           <div className="flex justify-between text-sm text-gray-400">
             <span>Price per ticket</span>
@@ -115,7 +110,7 @@ export default function BookSeats() {
             <span>₹{ticketCount * 250}</span>
           </div>
         </div>
-        {/* /* Action Button */}
+
         <button
           onClick={handleBooking}
           disabled={isPending}

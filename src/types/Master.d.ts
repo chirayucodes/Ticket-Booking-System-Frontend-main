@@ -13,4 +13,14 @@ declare namespace Master {
     id: number;
     movieName: string;
   }
+  interface Booking {
+    id: number;
+    user: User[];
+    showId: number;
+    seatsBooked: number;
+  }
+  interface User {
+    id: number;
+    name: string;
+  }
 }
