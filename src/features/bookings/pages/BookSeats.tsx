@@ -67,9 +67,7 @@ export default function BookSeats() {
         <p className="text-sm text-gray-400 mb-8 italic">
           {show?.availableSeats} seats available
         </p>
-        {/* <p>
-            <span className="font-bold">Movie:</span> {data?. || "N/A"}
-        </p> */}
+
         {/* simple sounter UI */}
         <div className="flex items-center justify-between bg-black/20 rounded-2xl p-6 border border-white/5 mb-8">
           <button

@@ -11,7 +11,7 @@ interface Booking {
   user: User[];
   showId: number;
   seatsBooked: number;
-  //hard coded
+  //hardcoded
   movieName?: string;
   theaterName?: string;
   showTime?: string;
@@ -124,7 +124,7 @@ const BookingHistory: React.FC = () => {
               </div>
             ))
           ) : (
-            <div className="border-2 border-dashed border-white/5 rounded-[2rem] p-20 text-center">
+            <div className="border-2 border-dashed border-white/5 rounded-4xl p-20 text-center">
               <p className="text-gray-600 font-bold italic">
                 No stories to show yet. Go book a movie!
               </p>

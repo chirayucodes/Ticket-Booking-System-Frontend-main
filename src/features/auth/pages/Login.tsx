@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../queries";
 import TextBox from "../../../shared/components/forms/TextBox";
+import { toast } from "sonner";
 
 interface LoginFormValues {
   userId: string;
@@ -12,15 +13,14 @@ export default function Login() {
   const navigate = useNavigate();
   const { mutateAsync, isPending } = useLoginMutation();
 
-  const form = useForm<LoginFormValues>({
-    defaultValues: { userId: "", password: "" },
-  });
+  const form = useForm<LoginFormValues>();
 
   async function handleLogin(values: LoginFormValues) {
     const response = await mutateAsync(values);
     const user = localStorage.setItem("user", JSON.stringify(response));
     console.log(user);
     navigate("/home");
+    toast.success(" Welcome Back");
   }
 
   return (

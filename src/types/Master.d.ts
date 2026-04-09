@@ -1,3 +1,5 @@
+
+
 declare namespace Master {
   interface LoginRequest {
     userId: string;

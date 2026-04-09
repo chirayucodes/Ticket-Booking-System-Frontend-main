@@ -2,7 +2,7 @@
 // import { MovieCard } from "../../../shared/components/MovieCard";
 import { MovieCard } from "shared/components/moviecard";
 import { useMoviesQuery } from "../queries";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface Movie {
   id: string | number;
@@ -12,10 +12,10 @@ interface Movie {
 export default function Home() {
   const { data: movies = [], isLoading } = useMoviesQuery();
 
-  const navigate = useNavigate();
-  const handleBookNow = (id: string | number) => {
-    navigate(`/booking/${id}`);
-  };
+  // const navigate = useNavigate();
+  // const handleBookNow = (id: string | number) => {
+  //   navigate(`/booking/${id}`);
+  // };
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#0d1117] flex items-center justify-center">
@@ -41,7 +41,7 @@ export default function Home() {
 
       <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {movies.map((movie: Movie) => (
-          <MovieCard key={movie.id} movie={movie} onBookNow={handleBookNow} />
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
 
