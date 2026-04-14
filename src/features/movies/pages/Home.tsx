@@ -1,8 +1,6 @@
-// import { MovieCard } from "@shared/components/MovieCard";
-// import { MovieCard } from "../../../shared/components/MovieCard";
 import { MovieCard } from "shared/components/moviecard";
 import { useMoviesQuery } from "../queries";
-// import { useNavigate } from "react-router-dom";
+
 
 interface Movie {
   id: string | number;
