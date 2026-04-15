@@ -15,10 +15,25 @@ export default function MovieCard({ movie }: { movie: Movie }) {
 
   const [date, setDate] = useState<Date | null>();
   const formattedDate = date ? date.toISOString().split("T")[0] : "";
+
   const { data: shows, isLoading } = useMovieShowsQuery(
     Number(movie.id),
     formattedDate,
   );
+
+  const now = new Date();
+  const oneHourBuffer = new Date(now.getTime() + 60 * 60 * 1000);
+
+  const isToday = date ? date.toDateString() === now.toDateString() : false;
+
+  const availableShows = shows?.filter((show) => {
+    const showTime = new Date(show.showTime);
+
+    if (isToday) {
+      return showTime > oneHourBuffer;
+    }
+    return true;
+  });
 
   return (
     <div
@@ -29,6 +44,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
             : "bg-white/0 border-transparent rounded-2xl p-4 hover:bg-white/5"
         }`}
     >
+      {/* 1. TICKET HEADER */}
       <div
         className="flex justify-between items-center"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -46,50 +62,42 @@ export default function MovieCard({ movie }: { movie: Movie }) {
         </div>
 
         <div
-          className={`text-gray-600 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+          className={`text-gray-600 transition-transform duration-300 ${
+            isExpanded ? "rotate-180" : ""
+          }`}
         >
           ▼
         </div>
       </div>
 
-      {/* 3. THE EXPANDABLE SECTION (Booking Logic) */}
+      {/* 2. EXPANDABLE BOOKING SECTION */}
       <div
-        className={`transition-all duration-500 ease-in-out ${isExpanded ? "max-h-125 mt-6 opacity-100" : "max-h-0 opacity-0"}`}
+        className={`transition-all duration-500 ease-in-out ${
+          isExpanded ? "max-h-125 mt-6 opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
         {/* Glass Separator */}
         <div className="h-px w-full bg-white/10 mb-6" />
 
-        {/* Dynamic Date Selection (Logic Unchanged) */}
+        {/* Date Selection (Minimized Gray Style) */}
         <div className="mb-6">
           <label className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 block">
             Choose Your Date
           </label>
-          {/* <Calendar
-            value={date}
-            onChange={(e) => setDate(e.value as Date)}
-            dateFormat="yy-mm-dd"
-            minDate={new Date()}
-            className="w-full h-8 custom-dark-calendar bg-gray-500" 
-            inputClassName="bg-white/5 border-white/10 text-white text-xs rounded-lg px-4 backdrop-blur-md"
-            placeholder="Select Date"
-            showIcon
-          /> */}
           <Calendar
             value={date}
             onChange={(e) => setDate(e.value as Date)}
             dateFormat="yy-mm-dd"
             minDate={new Date()}
-            // Removed bg-gray-500 and added a custom class for height/width
             className="w-full h-7 custom-mini-calendar"
             inputClassName="bg-white/5 border-white/5 text-[10px] text-gray-300 rounded-md px-2 backdrop-blur-sm hover:bg-white/10 transition-all outline-none"
             placeholder="Select Date"
             showIcon
-            // This makes the icon smaller and gray
             iconPos="right"
           />
         </div>
 
-        {/* Showtime Grid (Logic Unchanged) */}
+        {/* Showtime Grid */}
         <div className="space-y-3">
           <label className="text-[10px] text-gray-500 font-bold uppercase tracking-widest block">
             Pick Showtime
@@ -101,8 +109,8 @@ export default function MovieCard({ movie }: { movie: Movie }) {
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-2">
-              {shows && shows.length > 0 ? (
-                shows.map((show) => (
+              {availableShows && availableShows.length > 0 ? (
+                availableShows.map((show) => (
                   <button
                     key={show.id}
                     onClick={() =>
@@ -117,16 +125,22 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                       })}
                     </span>
                     <span
-                      className={`text-[9px] font-bold uppercase mt-1 ${show.availableSeats < 5 ? "text-yellow-500" : "text-green-500"}`}
+                      className={`text-[9px] font-bold uppercase mt-1 ${
+                        show.availableSeats < 5
+                          ? "text-yellow-500"
+                          : "text-green-500"
+                      }`}
                     >
-                      {show.availableSeats} Seats
+                      {show.availableSeats} Seats Left
                     </span>
                   </button>
                 ))
               ) : (
                 <div className="col-span-2 py-4 text-center border border-dashed border-white/10 rounded-xl">
                   <p className="text-[10px] text-gray-600 font-bold uppercase tracking-tight">
-                    No shows available for this date
+                    {shows && shows.length > 0
+                      ? "Shows are starting soon or finished"
+                      : "No shows available for this date"}
                   </p>
                 </div>
               )}

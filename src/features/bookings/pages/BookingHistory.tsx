@@ -11,7 +11,6 @@ interface Booking {
   user: User[];
   showId: number;
   seatsBooked: number;
-  //hardcoded
   movieName?: string;
   theaterName?: string;
   showTime?: string;
@@ -27,6 +26,10 @@ const BookingHistory: React.FC = () => {
     isLoading,
     isError,
   } = useUserBookingHistoryQuery(userId);
+
+  const sortedBookings = bookings
+    ? [...bookings].sort((a, b) => b.id - a.id)
+    : [];
 
   if (isLoading) {
     return (
@@ -60,13 +63,12 @@ const BookingHistory: React.FC = () => {
         </header>
 
         <div className="grid gap-6">
-          {bookings && bookings.length > 0 ? (
-            bookings.map((booking: Booking) => (
+          {sortedBookings.length > 0 ? (
+            sortedBookings.map((booking: Booking) => (
               <div
                 key={booking.id}
                 className="group relative backdrop-blur-3xl bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-[#F84464]/30 transition-all duration-500"
               >
-                {/* Decorative Side Glow */}
                 <div className="absolute left-0 top-0 w-1 h-full bg-[#F84464] opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
                 <div className="p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
