@@ -1,73 +1,115 @@
-# React + TypeScript + Vite
+# Ticket Booking System Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern frontend for a ticket booking system built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**.
+This project provides a responsive and user-friendly interface for browsing tickets, managing bookings, and handling user interactions smoothly.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Fast and responsive UI
+* Modern React + TypeScript codebase
+* Vite-powered development and build setup
+* Form handling with React Hook Form
+* Data management with React Query
+* Routing with React Router
+* Toast notifications with Sonner
+* Styled with Tailwind CSS
+* UI components powered by PrimeReact
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Frontend:** React, TypeScript
+* **Build Tool:** Vite
+* **Styling:** Tailwind CSS
+* **Forms:** React Hook Form
+* **State/Data Fetching:** TanStack React Query
+* **Routing:** React Router DOM
+* **UI Library:** PrimeReact
+* **Notifications:** Sonner
 
-## Expanding the ESLint configuration
+## Project Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* Node.js
+* npm or yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Clone the repository:
+
+```bash
+git clone https://github.com/chirayucodes/Ticket-Booking-System-Frontend-main.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Navigate to the project folder:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd Ticket-Booking-System-Frontend-main
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+## Available Scripts
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Build the project:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+Run lint checks:
+
+```bash
+npm run lint
+```
+
+## Folder Structure
+
+The project follows a typical Vite React structure:
+
+```bash
+src/
+├── assets/
+├── components/
+├── pages/
+├── routes/
+├── hooks/
+├── services/
+├── utils/
+└── main.tsx
+```
+
+## Notes
+
+* This project is currently frontend-only.
+* Backend API integration can be added separately for authentication, ticket management, booking confirmation, and payment handling.
+* Make sure the backend endpoints are configured correctly before running full booking flows.
+
+## Future Improvements
+
+* Add authentication and authorization
+* Integrate backend APIs
+* Add booking history and seat selection
+* Improve filtering and search
+* Add payment gateway integration
+* Enhance mobile responsiveness further
+
+## License
+
+This project can be used and modified according to the repository owner’s terms.
